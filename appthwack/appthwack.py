@@ -188,7 +188,7 @@ class AppThwackObject(object):
     """
 
     #List of expected attributes (keys) for a JSON response of specified type.
-    attributes = []
+    attributes = ()
 
     def __init__(self, **kwargs):
         """
@@ -206,7 +206,7 @@ class AppThwackProject(AppThwackObject, RequestsMixin):
     """
     Represents an AppThwack project as returned by `AppThwackApi`.
     """
-    attributes = 'id name url'.split()
+    attributes = ('id', 'name', 'url')
 
     def __new__(cls, *args, **kwargs):
         ### --- remove comment after code review ---
@@ -388,7 +388,7 @@ class AppThwackRun(AppThwackObject, RequestsMixin):
     """
     Represents a scheduled run returned by `AppThwackProject`.
     """
-    attributes = 'run_id'.split()
+    attributes = ('run_id',)
 
     def __init__(self, project, **kwargs):
         super(AppThwackRun, self).__init__(**kwargs)
@@ -451,7 +451,7 @@ class AppThwackFile(AppThwackObject):
     """
     Represents a app upload returned by `AppThwackApi`.
     """
-    attributes = 'file_id'.split()
+    attributes = ('file_id',)
 
     def __init__(self, **kwargs):
         super(AppThwackFile, self).__init__(**kwargs)
@@ -464,7 +464,7 @@ class AppThwackDevicePool(AppThwackObject):
     """
     Represents a pool of devices returned by `AppThwackProject`.
     """
-    attributes = 'id name'.split()
+    attributes = ('id','name')
 
     def __init__(self, **kwargs):
         super(AppThwackDevicePool, self).__init__(**kwargs)
