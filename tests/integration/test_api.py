@@ -1,6 +1,6 @@
 import os
 
-from nose.tools import assert_raises, assert_equal, assert_equals
+from nose.tools import assert_raises, assert_equal
 
 from appthwack import AppThwackApi, AppThwackApiError
 from appthwack.appthwack import AppThwackProject, AppThwackFile
@@ -8,6 +8,7 @@ from appthwack.appthwack import AppThwackProject, AppThwackFile
 from .utils import no_env
 
 api = None
+
 
 def setup():
     """ensure that there is an API KEY and set the (module) global variable api
@@ -41,6 +42,7 @@ def test_project():
         p = api.project(name=project.name)
         assert p.name == project.name
 
+
 class Test_upload(object):
 
     def setup(self):
@@ -68,7 +70,3 @@ class Test_upload(object):
         with assert_raises(AppThwackApiError) as e:
             api.upload(self.valid_path, name='fred')
         assert 'Unsupported file type' in str(e.exception), str(e.exception)
-
-
-
-
