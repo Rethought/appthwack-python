@@ -19,6 +19,8 @@ except ImportError:
 DOMAIN = 'https://appthwack.com'
 ROOT = 'api'
 
+(ANDROID_PROJECT, WEB_PROJECT, IOS_PROJECT) = range(1,4)
+
 
 def keyword_filter(keys, **kwargs):
     """
@@ -198,7 +200,7 @@ class AppThwackObject(object):
         :param kwargs: Decoded JSON mapping.
         """
         if not kwargs or not all(k in kwargs for k in self.attributes):
-            raise ValueError('Invalid decoded JSON.')
+            raise ValueError('Invalid decoded json (for {}).'.format(self.__class__.__name__))
         self.__dict__.update(kwargs)
 
 
@@ -209,8 +211,13 @@ class AppThwackProject(AppThwackObject, RequestsMixin):
     attributes = 'id name url'.split()
 
     def __new__(cls, *args, **kwargs):
-        project_types = [AppThwackAndroidProject, AppThwackWebProject, AppThwackIOSProject]
-        cls = project_types[kwargs.get('project_type_id', 1) - 1] #type_id isn't zero based
+        #project_types = [AppThwackAndroidProject, AppThwackWebProject, AppThwackIOSProject]
+        #cls = project_types[kwargs.get('project_type_id', 1) - 1] #type_id isn't zero based
+        # the above code accepts a project code of 0, maps it to -1 and so returns IOSProject.
+        project_types = {ANDROID_PROJECT: AppThwackAndroidProject,
+                         WEB_PROJECT: AppThwackWebProject,
+                         IOS_PROJECT: AppThwackIOSProject}
+        cls = project_types[kwargs.get('project_type_id', 1)]
         return super(AppThwackProject, cls).__new__(cls, *args, **kwargs)
 
     def __init__(self, **kwargs):
