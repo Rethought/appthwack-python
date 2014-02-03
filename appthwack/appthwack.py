@@ -23,7 +23,7 @@ def keyword_filter(keys, **kwargs):
     """
     Find first instance of a key in kwargs and return the matching key/value pair.
 
-    :param keys: Iterable containing keys we which is search kwargs for.
+    :param keys: Iterable containing keys which we search kwargs for.
     :param kwargs: Mapping which contains key/value pairs we're filtering down.
     """
     return next(iter(((k, str(v)) for (k, v) in ((k, kwargs.get(k)) for k in keys) if v)), (None, None))
@@ -31,7 +31,8 @@ def keyword_filter(keys, **kwargs):
 
 class AppThwackApiError(Exception):
     """
-    Exception to describe an error when communicating with the AppThwack API.
+    Exception to describe an error which has arisen as a result of
+    communicating with the AppThwack API.
     """
     pass
 

@@ -38,6 +38,3 @@ def test_device_pool():
         d = project.device_pool(name=device_pool.name)
         assert_equal(d.name, device_pool.name)
         assert_equal(d.id, device_pool.id)
-
-
-

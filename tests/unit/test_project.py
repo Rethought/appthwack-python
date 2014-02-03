@@ -51,7 +51,7 @@ class TestConstructor(object):
             AppThwackProject(name='invalid', url='myurl', id=123, project_type_id=4)
 
 
-def test_str():
+def test__str__():
     p = AppThwackProject(name='anyandroid', id=12345, url='a-url')
     assert_equals(str(p), 'project/a-url')
 
