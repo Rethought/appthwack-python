@@ -11,14 +11,11 @@ import os
 import requests
 import urllib
 
-try:
-    import cStringIO as StringIO
-except ImportError:
-    import StringIO
-
 DOMAIN = 'https://appthwack.com'
 ROOT = 'api'
 
+# define names for the project_type_id values as the ordering is not obvious
+# to the occasional user
 (ANDROID_PROJECT, WEB_PROJECT, IOS_PROJECT) = range(1,4)
 
 
@@ -211,13 +208,15 @@ class AppThwackProject(AppThwackObject, RequestsMixin):
     attributes = 'id name url'.split()
 
     def __new__(cls, *args, **kwargs):
+        ### --- remove comment after code review ---
         #project_types = [AppThwackAndroidProject, AppThwackWebProject, AppThwackIOSProject]
         #cls = project_types[kwargs.get('project_type_id', 1) - 1] #type_id isn't zero based
         # the above code accepts a project code of 0, maps it to -1 and so returns IOSProject.
+        ### --- end remove comment after code review ---
         project_types = {ANDROID_PROJECT: AppThwackAndroidProject,
                          WEB_PROJECT: AppThwackWebProject,
                          IOS_PROJECT: AppThwackIOSProject}
-        cls = project_types[kwargs.get('project_type_id', 1)]
+        cls = project_types[kwargs.get('project_type_id', ANDROID_PROJECT)]
         return super(AppThwackProject, cls).__new__(cls, *args, **kwargs)
 
     def __init__(self, **kwargs):

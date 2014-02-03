@@ -5,20 +5,16 @@ from nose.tools import assert_raises, assert_equal
 from appthwack import AppThwackApi, AppThwackApiError
 from appthwack.appthwack import AppThwackProject, AppThwackFile
 
-from .utils import no_env
+from .utils import no_env, get_valid_api
 
 api = None
 
 
 def setup():
-    """ensure that there is an API KEY and set the (module) global variable api
-    """
-    try:
-        os.environ['APPTHWACK_API_KEY']
-        global api
-        api = AppThwackApi()
-    except KeyError:
-        assert False, ' No APPTHWACK_API_KEY environment variable set!'
+    '''ensure that there is an API KEY and set the (module) global variable api
+    '''
+    global api
+    api = get_valid_api()
 
 
 def test_constructor_fails_if_no_env_var_set():
@@ -41,6 +37,7 @@ def test_project():
         project = projects[0]
         p = api.project(name=project.name)
         assert p.name == project.name
+        assert p.id == project.id
 
 
 class Test_upload(object):

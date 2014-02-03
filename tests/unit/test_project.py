@@ -1,12 +1,12 @@
 
-from nose.tools import assert_raises, assert_equal
+from nose.tools import assert_raises, assert_equal, assert_equals
 
 from appthwack.appthwack import (AppThwackProject, AppThwackAndroidProject,
                                  AppThwackIOSProject, AppThwackWebProject,
                                  ANDROID_PROJECT, WEB_PROJECT, IOS_PROJECT
                                 )
 
-class TestConstructor():
+class TestConstructor(object):
 
     def test_not_all_attributes_set(self):
         with assert_raises(ValueError) as e:
@@ -49,3 +49,10 @@ class TestConstructor():
             AppThwackProject(name='invalid', url='myurl', id=123, project_type_id=0)
         with assert_raises(KeyError):
             AppThwackProject(name='invalid', url='myurl', id=123, project_type_id=4)
+
+
+def test_str():
+    p = AppThwackProject(name='anyandroid', id=12345, url='a-url')
+    assert_equals(str(p), 'project/a-url')
+
+
