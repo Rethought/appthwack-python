@@ -42,5 +42,4 @@ def get_valid_api():
     if 'APPTHWACK_API_KEY'in os.environ:
         return AppThwackApi()
     else:
-        print sorted(os.environ.iterkeys())
         raise RunSetupError(' No APPTHWACK_API_KEY environment variable set!')

@@ -1,9 +1,10 @@
 import os
 
-from nose.tools import assert_raises, assert_equal
+from nose.tools import assert_equal
 
 from appthwack import AppThwackApi, AppThwackApiError
 from appthwack.appthwack import AppThwackProject, AppThwackFile
+from tests.assert_raises import assert_raises
 
 from .utils import no_env, get_valid_api
 
@@ -15,7 +16,6 @@ def setup():
     '''
     global api
     api = get_valid_api()
-
 
 def test_constructor_fails_if_no_env_var_set():
     with no_env('APPTHWACK_API_KEY'):

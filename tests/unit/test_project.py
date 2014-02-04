@@ -1,10 +1,13 @@
 
-from nose.tools import assert_raises, assert_equal, assert_equals
+from nose.tools import assert_equal, assert_equals
 
 from appthwack.appthwack import (AppThwackProject, AppThwackAndroidProject,
                                  AppThwackIOSProject, AppThwackWebProject,
                                  ANDROID_PROJECT, WEB_PROJECT, IOS_PROJECT
                                 )
+
+from tests.assert_raises import assert_raises
+
 
 class TestConstructor(object):
 
